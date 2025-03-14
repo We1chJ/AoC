@@ -56,17 +56,18 @@ int main(){
 
         for (auto [dx, dy] : vector<array<int, 2>>{{0, 1}, {1, 0}, {0, -1}, {-1, 0}}) {
             int nx = x + dx, ny = y + dy;
-            for (auto [ddx, ddy] : vector<array<int, 2>>{{0, 1}, {1, 0}, {0, -1}, {-1, 0}}) {
-                int nnx = nx + ddx, nny = ny + ddy;
+            // for (auto [ddx, ddy] : vector<array<int, 2>>{{0, 1}, {1, 0}, {0, -1}, {-1, 0}}) {
+                // int nnx = nx + ddx, nny = ny + ddy;
+                
                 for (auto [newx, newy] : vector<array<int, 2>>{{0, 1}, {1, 0}, {0, -1}, {-1, 0}}) {
-                    int lastx = nnx + newx, lasty = nny + newy;
+                    int lastx = nx + newx, lasty = ny + newy;
                     if (lastx >= 0 && lastx < n && lasty >= 0 && lasty < m && map[lastx][lasty] != '#') {
-                        if(timeNormal - (depth + timeToEnd[lastx][lasty] + 3) >= 1){
-                            ans[nx][ny].insert({nnx, nny});
+                        if(timeNormal - (depth + timeToEnd[lastx][lasty] + 2) >= 100){
+                            ans[nx][ny].insert({lastx, lasty});
                         }
                     }
                 }
-            }
+            // }
         }
         for (auto [dx, dy] : vector<array<int, 2>>{{0, 1}, {1, 0}, {0, -1}, {-1, 0}}) {
             int nx = x + dx, ny = y + dy;
@@ -83,9 +84,9 @@ int main(){
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < m; j++) {
             cnt += ans[i][j].size();
-            for (const auto& p : ans[i][j]) {
-                cout << "(" << i << ", " << j << ") -> (" << p.first << ", " << p.second << ")" << endl;
-            }
+            // for (const auto& p : ans[i][j]) {
+            //     cout << "(" << i << ", " << j << ") -> (" << p.first+1 << ", " << p.second+1 << ")" << endl;
+            // }
         }
     }
     cout << cnt << endl;
